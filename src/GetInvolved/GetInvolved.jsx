@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const GetInvolved = () => {
   const [activeCard, setActiveCard] = useState(null);
+  const navigate = useNavigate();
 
   const handleCardFlip = (index) => {
     setActiveCard(activeCard === index ? null : index);
@@ -18,8 +20,18 @@ const GetInvolved = () => {
         <div className="text-center max-w-3xl px-8 z-10">
           <h1 className="text-5xl font-bold mb-8 drop-shadow-md">Become an ocean hero! Join the Movement to Protect Our Oceans!</h1>
           <div className="flex justify-center gap-6 mt-8 flex-wrap">
-            <button className="bg-teal-500 text-white px-8 py-4 text-lg font-semibold rounded hover:translate-y-[-3px] transition duration-300 hover:shadow-lg">Volunteer Now</button>
-            <button className="bg-white bg-opacity-90 text-blue-700 px-8 py-4 text-lg font-semibold rounded hover:translate-y-[-3px] transition duration-300 hover:shadow-lg">Report an Issue</button>
+            <button 
+              className="bg-teal-500 text-white px-8 py-4 text-lg font-semibold rounded hover:translate-y-[-3px] transition duration-300 hover:shadow-lg"
+              onClick={() => navigate('/login')}
+            >
+              Volunteer Now
+            </button>
+            <button 
+              className="bg-white bg-opacity-90 text-blue-700 px-8 py-4 text-lg font-semibold rounded hover:translate-y-[-3px] transition duration-300 hover:shadow-lg"
+              onClick={() => navigate('/report')}
+            >
+              Report an Issue
+            </button>
           </div>
         </div>
       </section>

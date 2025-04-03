@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowRight, FaArrowLeft, FaMapMarkerAlt, FaChartLine, FaHandsHelping } from 'react-icons/fa';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const statistics = [
-  { id: 1, value: '27%', label: 'Coastal Erosion Rate' },
-  { id: 2, value: '1,500', label: 'Tons of Plastic Waste' },
-  { id: 3, value: '130km', label: 'Affected Shoreline' },
-  { id: 4, value: '8M+', label: 'People Impacted' }
+  { id: 1, value: '35%', label: 'Coastal Erosion Rate' },
+  { id: 2, value: '9,400', label: 'Tons of Plastic Waste' },
+  { id: 3, value: '149km', label: 'Affected Shoreline' },
+  { id: 4, value: '1M+', label: 'People Impacted' }
 ];
 
 // Sample data for project cards
@@ -33,13 +33,16 @@ const projectCards = [
     title: 'Report Coastal Issues',
     description: 'Help us monitor and address coastal problems by submitting reports.',
     icon: <FaChartLine />,
-    link: '/report-issues'
+    link: '/report'
   }
 ];
 
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 3;
+  const aboutSectionRef = useRef(null);
+  const topRef = useRef(null);
+  const navigate = useNavigate();
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
@@ -47,6 +50,23 @@ const HomePage = () => {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToAbout = () => {
+    aboutSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleLinkClick = () => {
+    window.scrollTo(0, 0);
+  };
+
+  const navigateToErosionMap = () => {
+    navigate('/ErosionMap');
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {
@@ -58,18 +78,17 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-white" ref={topRef}>
       {/* Navbar */}
       <nav className="bg-blue-600 text-white py-4 px-6 flex justify-between items-center shadow-md">
         <div className="text-2xl font-bold">
           <h1>ShoreScan</h1>
         </div>
         <div className="flex items-center space-x-6">
-          <Link to="/" className="hover:text-blue-200 transition-colors">Home</Link>
-          <Link to="/about" className="hover:text-blue-200 transition-colors">About Us</Link>
+          <button onClick={scrollToTop} className="hover:text-blue-200 transition-colors">Home</button>
+          <button onClick={scrollToAbout} className="hover:text-blue-200 transition-colors">About Us</button>
           <div className="flex space-x-3 ml-6">
             <Link to="/login" className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-700 transition-colors">Login</Link>
-            <Link to="/signup" className="px-4 py-2 rounded-md bg-white text-blue-600 hover:bg-blue-100 transition-colors">Sign Up</Link>
           </div>
         </div>
       </nav>
@@ -99,34 +118,45 @@ const HomePage = () => {
               >
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">Where technology meets environmental stewardship</h1>
                 <h2 className="text-xl md:text-2xl mb-8">Creating sustainable solutions for Mumbai's threatened shoreline.</h2>
-                <motion.button 
-                  className="px-6 py-3 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Learn More
-                </motion.button>
               </motion.div>
             </div>
 
-            {/* Slide 2: Interactive Map */}
-            <div className="min-w-full h-full flex flex-col items-center justify-center bg-gray-100 p-6">
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">Mumbai's Coastal Health</h2>
-              <div className="w-full max-w-4xl h-96 rounded-lg overflow-hidden shadow-lg mb-4">
-                <MapContainer center={[19.076, 72.8777]} zoom={11} scrollWheelZoom={false} className="h-full w-full">
-                  <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  />
-                  <Marker position={[19.076, 72.8777]}>
-                    <Popup>
-                      Marine Drive, Mumbai
-                    </Popup>
-                  </Marker>
-                </MapContainer>
-              </div>
-              <p className="text-lg text-gray-600">Explore our interactive heat map showing Mumbai's vulnerable coastal areas</p>
-            </div>
+           {/* Slide 2: Erosion Map Preview */}
+<div className="min-w-full h-full flex flex-col items-center justify-center bg-gray-100 p-6">
+  <h2 className="text-3xl font-bold text-gray-800 mb-6">Mumbai's Coastal Erosion Map</h2>
+  <div className="w-full max-w-4xl flex flex-col items-center">
+    <div className="h-96 w-full rounded-lg overflow-hidden shadow-lg mb-6 relative">
+      {<MapContainer center={[19.076, 72.8777]} zoom={11} scrollWheelZoom={false} className="h-full w-full">
+      <TileLayer
+        url="https://earthengine.googleapis.com/v1/projects/ee-siddhibirje007/maps/44c2aafd6037b679bc1dc01d58a2fc69-48801abab84ae33a673bd2317697c7a9/tiles/{z}/{x}/{y}"
+        attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={[19.076, 72.8777]}>
+        <Popup>
+          Marine Drive, Mumbai
+        </Popup>
+      </Marker>
+    </MapContainer>}
+      <div className="absolute inset-0 bg-[url('https://via.placeholder.com/1920x1080?text=Erosion+Map+Preview')] bg-cover bg-center"></div>
+      <div className="absolute inset-0 bg-black/30"></div>
+    </div>
+    
+    {/* Button below the map instead of overlaid */}
+    <motion.button 
+      onClick={() => {
+        navigate('/ErosionMap');
+        window.scrollTo(0, 0);
+      }}
+      className="px-6 py-3 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition-colors shadow-lg mb-4"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      Show Full Erosion Map
+    </motion.button>
+    
+    <p className="text-lg text-gray-600">Explore our interactive map showing Mumbai's coastal erosion patterns</p>
+  </div>
+</div>
 
             {/* Slide 3: Data Exploration */}
             <div className="min-w-full h-full flex flex-col items-center justify-center bg-blue-50 p-6">
@@ -149,6 +179,10 @@ const HomePage = () => {
                 </motion.div>
                 <p className="text-lg text-gray-600 mb-6">Dive deeper into our data-driven analysis of coastal changes over time</p>
                 <motion.button 
+                  onClick={() => {
+                    navigate('/ErosionGraph');
+                    window.scrollTo(0, 0);
+                  }}
                   className="px-6 py-3 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition-colors"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -172,7 +206,7 @@ const HomePage = () => {
       </section>
 
       {/* About Us Section */}
-      <section className="py-16 px-6 bg-white">
+      <section ref={aboutSectionRef} className="py-16 px-6 bg-white">
         <motion.div 
           className="text-center mb-12"
           initial={{ opacity: 0, y: 50 }}
@@ -283,7 +317,13 @@ const HomePage = () => {
               <div className="text-4xl text-blue-600 mb-4">{card.icon}</div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">{card.title}</h3>
               <p className="text-gray-700 mb-6">{card.description}</p>
-              <Link to={card.link} className="inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">Learn More</Link>
+              <Link 
+                to={card.link} 
+                className="inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                onClick={handleLinkClick}
+              >
+                Learn More
+              </Link>
             </motion.div>
           ))}
         </div>
@@ -314,7 +354,7 @@ const HomePage = () => {
         </div>
         
         <div className="max-w-6xl mx-auto border-t border-gray-700 mt-8 pt-6 text-center">
-          <p>&copy; {new Date().getFullYear()} Mumbai Coastal Project. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Mumbai Coastal Project. All rights reserved.</p>
         </div>
       </footer>
     </div>

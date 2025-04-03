@@ -6,6 +6,8 @@ import GetInvolved from "./GetInvolved/GetInvolved";
 import  CommunityEngage from "./CommunityEngage/CommunityEngage";
 import  Login from "./Login/Login";
 import  Report from "./Report/Report";
+import ErosionMap from "./ErosionMap/ErosionMap";
+import ErosionGraph from "./ErosionGraph/ErosionGraph";
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -17,6 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/CommunityEngage" element={<CommunityEngage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Report" element={<Report />} />
+        <Route path="/ErosionMap" element={<ErosionMap />} />
+        <Route path="/ErosionGraph" element={<ErosionGraph />} />
     
       </Routes>
     </Router>
