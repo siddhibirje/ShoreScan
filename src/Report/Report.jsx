@@ -93,7 +93,7 @@ const Report = () => {
   };
 
   const buttonVariants = {
-    hover: { scale: 1.05, backgroundColor: '#0369a1' },
+    hover: { scale: 1.05, backgroundColor: '#0d9488' },
     tap: { scale: 0.95 }
   };
 
@@ -106,18 +106,18 @@ const Report = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-teal-900 to-teal-700 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <motion.div 
-          className="bg-white rounded-lg shadow-xl overflow-hidden"
+          className="bg-white/10 backdrop-blur-lg rounded-lg shadow-xl overflow-hidden border border-teal-500/20"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           {/* Header */}
-          <div className="bg-blue-600 px-6 py-4">
+          <div className="bg-gradient-to-r from-teal-600 to-teal-800 px-6 py-4">
             <h1 className="text-2xl font-bold text-white">Coastal Issue Report</h1>
-            <p className="text-blue-100 mt-1">
+            <p className="text-teal-100 mt-1">
               Help us keep the beaches safe and clean by reporting issues
             </p>
           </div>
@@ -125,20 +125,20 @@ const Report = () => {
           {/* Progress bar */}
           {!isSubmitted && (
             <div className="px-6 pt-4">
-              <div className="w-full bg-gray-200 rounded-full h-2.5">
+              <div className="w-full bg-white/10 rounded-full h-2.5">
                 <motion.div 
-                  className="bg-blue-600 h-2.5 rounded-full"
+                  className="bg-teal-500 h-2.5 rounded-full"
                   variants={progressVariants}
                   initial="initial"
                   animate={`step${step}`}
                   transition={{ duration: 0.3 }}
                 ></motion.div>
               </div>
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
-                <span className={step >= 1 ? 'text-blue-600 font-medium' : ''}>Issue Type</span>
-                <span className={step >= 2 ? 'text-blue-600 font-medium' : ''}>Photo</span>
-                <span className={step >= 3 ? 'text-blue-600 font-medium' : ''}>Location</span>
-                <span className={step >= 4 ? 'text-blue-600 font-medium' : ''}>Details</span>
+              <div className="flex justify-between text-xs text-white/70 mt-1">
+                <span className={step >= 1 ? 'text-teal-300 font-medium' : ''}>Issue Type</span>
+                <span className={step >= 2 ? 'text-teal-300 font-medium' : ''}>Photo</span>
+                <span className={step >= 3 ? 'text-teal-300 font-medium' : ''}>Location</span>
+                <span className={step >= 4 ? 'text-teal-300 font-medium' : ''}>Details</span>
               </div>
             </div>
           )}
@@ -164,8 +164,8 @@ const Report = () => {
                         whileTap={{ scale: 0.98 }}
                         className={`border rounded-lg p-4 cursor-pointer ${
                           formData.issueType === issue.value
-                            ? 'border-blue-500 bg-blue-50'
-                            : 'border-gray-200 hover:border-blue-300'
+                            ? 'border-teal-500 bg-teal-50'
+                            : 'border-gray-200 hover:border-teal-300'
                         }`}
                         onClick={() => setFormData({ ...formData, issueType: issue.value })}
                       >
@@ -211,7 +211,7 @@ const Report = () => {
                           </button>
                         </div>
                       ) : (
-                        <label className="w-full flex flex-col items-center px-4 py-6 bg-white text-blue-500 rounded-lg shadow-lg tracking-wide border border-blue-200 cursor-pointer hover:bg-blue-50">
+                        <label className="w-full flex flex-col items-center px-4 py-6 bg-white text-teal-500 rounded-lg shadow-lg tracking-wide border border-teal-200 cursor-pointer hover:bg-teal-50">
                           <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                           </svg>
@@ -253,7 +253,7 @@ const Report = () => {
                       name="location"
                       value={formData.location}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                       placeholder="e.g. Sunset Beach, North Shore"
                       required
                     />
@@ -269,7 +269,7 @@ const Report = () => {
                         name="coordinates"
                         value={formData.coordinates}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                         placeholder="e.g. 34.0522° N, 118.2437° W"
                       />
                       <motion.button
@@ -277,7 +277,7 @@ const Report = () => {
                         whileHover="hover"
                         whileTap="tap"
                         type="button"
-                        className="bg-blue-500 text-white rounded-md px-4 flex items-center justify-center"
+                        className="bg-teal-500 text-white rounded-md px-4 flex items-center justify-center"
                         onClick={() => {
                           // This would normally use the Geolocation API
                           setFormData({ 
@@ -322,7 +322,7 @@ const Report = () => {
                       value={formData.description}
                       onChange={handleInputChange}
                       rows="3"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                       placeholder="Please provide details about what you observed..."
                       required
                     ></textarea>
@@ -337,13 +337,13 @@ const Report = () => {
                       name="contactEmail"
                       value={formData.contactEmail}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                       placeholder="To receive updates on your report"
                     />
                   </div>
                   
-                  <div className="bg-blue-50 p-4 rounded-lg mb-6">
-                    <h3 className="font-medium text-blue-800 mb-2">Your Report Summary</h3>
+                  <div className="bg-teal-50 p-4 rounded-lg mb-6">
+                    <h3 className="font-medium text-teal-800 mb-2">Your Report Summary</h3>
                     <ul className="space-y-2 text-sm text-gray-700">
                       <li><span className="font-medium">Issue Type:</span> {issueTypes.find(i => i.value === formData.issueType)?.label}</li>
                       <li><span className="font-medium">Location:</span> {formData.location}</li>
@@ -379,7 +379,7 @@ const Report = () => {
                       whileTap="tap"
                       type="button"
                       onClick={goToNextStep}
-                      className="px-5 py-2 bg-blue-600 text-white rounded-md font-medium"
+                      className="px-5 py-2 bg-teal-600 text-white rounded-md font-medium"
                     >
                       Continue
                     </motion.button>
@@ -391,7 +391,7 @@ const Report = () => {
                       type="button"
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className={`px-5 py-2 bg-blue-600 text-white rounded-md font-medium flex items-center ${
+                      className={`px-5 py-2 bg-teal-600 text-white rounded-md font-medium flex items-center ${
                         isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
                       }`}
                     >
@@ -433,7 +433,7 @@ const Report = () => {
                 whileTap="tap"
                 type="button"
                 onClick={resetForm}
-                className="px-5 py-2 bg-blue-600 text-white rounded-md font-medium"
+                className="px-5 py-2 bg-teal-600 text-white rounded-md font-medium"
               >
                 Submit Another Report
               </motion.button>

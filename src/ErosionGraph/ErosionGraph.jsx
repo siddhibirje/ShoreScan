@@ -16,9 +16,9 @@ const erosionData = [
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-        <p className="font-semibold text-gray-800">{`Year: ${label}`}</p>
-        <p className="text-teal-600">
+      <div className="glass-card p-4 rounded-lg">
+        <p className="font-semibold text-white">{`Year: ${label}`}</p>
+        <p className="text-teal-200">
           <span className="font-medium">Erosion: </span>
           <span>{`${payload[0].value} meters`}</span>
         </p>
@@ -39,82 +39,90 @@ const ErosionGraph = () => {
   const totalErosion = lastYear - firstYear;
   
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-xl shadow-xl p-6 max-w-4xl mx-auto">
-      <div className="mb-6">
-        <h2 className="text-3xl font-bold text-gray-800 text-center">Shoreline Erosion Analysis</h2>
-        <p className="text-gray-600 text-center mt-2">Measuring coastal changes from 2017 to 2025</p>
-      </div>
-      
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-        <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="bg-blue-50 rounded-lg p-4 text-center">
-            <p className="text-gray-600 text-sm">Total Erosion</p>
-            <p className="text-3xl font-bold text-blue-700">{totalErosion}m</p>
+    <div className="min-h-screen bg-gradient-to-br from-teal-900 to-teal-700 p-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="glass-card p-8 rounded-2xl mb-8">
+          <h1 className="text-4xl sm:text-5xl font-bold text-white text-center mb-4">
+            Shoreline Erosion Analysis
+          </h1>
+          <p className="text-xl text-white/90 text-center">
+            Measuring coastal changes from 2017 to 2025
+          </p>
+        </div>
+        
+        <div className="glass-card p-6 rounded-xl mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            <div className="glass-card p-4 rounded-lg text-center">
+              <h3 className="text-lg font-semibold text-white mb-2">Total Erosion</h3>
+              <p className="text-3xl font-bold text-blue-400">{totalErosion}m</p>
+            </div>
+            <div className="glass-card p-4 rounded-lg text-center">
+              <h3 className="text-lg font-semibold text-white mb-2">Average Annual</h3>
+              <p className="text-3xl font-bold text-teal-400">{avgAnnualIncrease}m</p>
+            </div>
+            <div className="glass-card p-4 rounded-lg text-center">
+              <h3 className="text-lg font-semibold text-white mb-2">Latest Reading</h3>
+              <p className="text-3xl font-bold text-blue-400">{lastYear}m</p>
+            </div>
           </div>
-          <div className="bg-teal-50 rounded-lg p-4 text-center">
-            <p className="text-gray-600 text-sm">Average Annual</p>
-            <p className="text-3xl font-bold text-teal-700">{avgAnnualIncrease}m</p>
-          </div>
-          <div className="bg-indigo-50 rounded-lg p-4 text-center">
-            <p className="text-gray-600 text-sm">Latest Reading</p>
-            <p className="text-3xl font-bold text-indigo-700">{lastYear}m</p>
+          
+          <div className="glass-card p-6 rounded-lg">
+            <div className="h-80 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart
+                  data={erosionData}
+                  margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                >
+                  <defs>
+                    <linearGradient id="erosionGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#22D3EE" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#22D3EE" stopOpacity={0.1} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
+                  <XAxis 
+                    dataKey="year" 
+                    tick={{ fill: '#fff' }}
+                    axisLine={{ stroke: 'rgba(255, 255, 255, 0.3)' }}
+                  />
+                  <YAxis 
+                    tick={{ fill: '#fff' }}
+                    axisLine={{ stroke: 'rgba(255, 255, 255, 0.3)' }}
+                    label={{ value: 'Erosion (meters)', angle: -90, position: 'insideLeft', offset: -5, fill: '#fff' }}
+                  />
+                  <Tooltip content={<CustomTooltip />} />
+                  <Area 
+                    type="monotone" 
+                    dataKey="erosion" 
+                    stroke="#22D3EE" 
+                    strokeWidth={3}
+                    fillOpacity={1} 
+                    fill="url(#erosionGradient)" 
+                    activeDot={{ r: 8, fill: '#06B6D4', stroke: '#fff', strokeWidth: 2 }}
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
         
-        <div className="h-80 w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart
-              data={erosionData}
-              margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-            >
-              <defs>
-                <linearGradient id="erosionGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0EA5E9" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#0EA5E9" stopOpacity={0.1} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-              <XAxis 
-                dataKey="year" 
-                tick={{ fill: '#6B7280' }}
-                axisLine={{ stroke: '#9CA3AF' }}
-              />
-              <YAxis 
-                tick={{ fill: '#6B7280' }}
-                axisLine={{ stroke: '#9CA3AF' }}
-                label={{ value: 'Erosion (meters)', angle: -90, position: 'insideLeft', offset: -5, fill: '#6B7280', fontSize: 12 }}
-              />
-              <Tooltip content={<CustomTooltip />} />
-              <Area 
-                type="monotone" 
-                dataKey="erosion" 
-                stroke="#0EA5E9" 
-                strokeWidth={3}
-                fillOpacity={1} 
-                fill="url(#erosionGradient)" 
-                activeDot={{ r: 8, fill: '#0369A1', stroke: '#fff', strokeWidth: 2 }}
-              />
-            </AreaChart>
-          </ResponsiveContainer>
+        <div className="glass-card p-6 rounded-xl">
+          <h3 className="text-2xl font-semibold text-white mb-4">Analysis Insights</h3>
+          <ul className="space-y-4 text-white/90">
+            <li className="flex items-start">
+              <div className="min-w-4 h-4 w-4 rounded-full bg-blue-400 mt-1 mr-3"></div>
+              <p>Shoreline erosion has increased by <span className="font-medium text-blue-300">{totalErosion} meters</span> over the 9-year period.</p>
+            </li>
+            <li className="flex items-start">
+              <div className="min-w-4 h-4 w-4 rounded-full bg-teal-400 mt-1 mr-3"></div>
+              <p>The average annual increase rate is <span className="font-medium text-teal-300">{avgAnnualIncrease} meters</span>, indicating a steady progression.</p>
+            </li>
+            <li className="flex items-start">
+              <div className="min-w-4 h-4 w-4 rounded-full bg-cyan-400 mt-1 mr-3"></div>
+              <p>The most significant erosion occurred between 2019-2020, with a <span className="font-medium text-cyan-300">{(erosionData[3].erosion - erosionData[2].erosion).toFixed(1)} meter</span> increase.</p>
+            </li>
+          </ul>
         </div>
-      </div>
-      
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">Analysis Insights</h3>
-        <ul className="space-y-3 text-gray-700">
-          <li className="flex items-start">
-            <div className="min-w-4 h-4 w-4 rounded-full bg-blue-500 mt-1 mr-2"></div>
-            <p>Shoreline erosion has increased by <span className="font-medium">{totalErosion} meters</span> over the 9-year period.</p>
-          </li>
-          <li className="flex items-start">
-            <div className="min-w-4 h-4 w-4 rounded-full bg-teal-500 mt-1 mr-2"></div>
-            <p>The average annual increase rate is <span className="font-medium">{avgAnnualIncrease} meters</span>, indicating a steady progression.</p>
-          </li>
-          <li className="flex items-start">
-            <div className="min-w-4 h-4 w-4 rounded-full bg-indigo-500 mt-1 mr-2"></div>
-            <p>The most significant erosion occurred between 2019-2020, with a <span className="font-medium">{(erosionData[3].erosion - erosionData[2].erosion).toFixed(1)} meter</span> increase.</p>
-          </li>
-        </ul>
       </div>
     </div>
   );

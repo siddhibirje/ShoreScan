@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { FaHandsHelping, FaTrash, FaCalendarAlt, FaUsers, FaWater } from 'react-icons/fa';
 
 const GetInvolved = () => {
   const [activeCard, setActiveCard] = useState(null);
@@ -10,155 +12,388 @@ const GetInvolved = () => {
   };
 
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-hidden bg-gradient-to-b from-primary-darker via-primary-dark to-primary-darker">
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[600px] flex justify-center items-center text-white overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full z-[-1]">
-        <div className="absolute top-0 left-0 w-full h-full" style={{ backgroundColor: '#1E3A8A',opacity: 0.5 }}></div>
-          <div className="w-full h-full bg-cover bg-center" style={{backgroundImage: "url('https://source.unsplash.com/random/1600x900/?beach,cleanup')"}}></div>
+      <motion.section 
+        className="relative min-h-[80vh] pt-32 pb-20 flex justify-center items-center text-white overflow-hidden"
+        whileHover={{
+          backgroundColor: "rgba(13, 40, 81, 0.8)",
+          transition: { duration: 0.3 }
+        }}
+      >
+        <div className="absolute inset-0 z-0">
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-br from-primary-darker/90 to-primary-dark/90 backdrop-blur-sm"
+            whileHover={{
+              backdropFilter: "blur(8px)",
+              transition: { duration: 0.3 }
+            }}
+          ></motion.div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-br from-teal-500/20 via-teal-400/10 to-teal-300/20"
+            animate={{ 
+              opacity: [0.2, 0.3, 0.2],
+              scale: [1, 1.05, 1],
+            }}
+            whileHover={{
+              opacity: 0.4,
+              scale: 1.05,
+              transition: { duration: 0.3 }
+            }}
+            transition={{ 
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
         </div>
-        <div className="text-center max-w-3xl px-8 z-10">
-          <h1 className="text-5xl font-bold mb-8 drop-shadow-md">Become an ocean hero! Join the Movement to Protect Our Oceans!</h1>
-          <div className="flex justify-center gap-6 mt-8 flex-wrap">
-            <button 
-              className="bg-teal-500 text-white px-8 py-4 text-lg font-semibold rounded hover:translate-y-[-3px] transition duration-300 hover:shadow-lg"
+        <div className="relative z-10 text-center max-w-4xl px-8">
+          <motion.h1 
+            className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-teal-200 via-white to-teal-200 leading-tight"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            Get Involved - Protect Our Oceans!
+          </motion.h1>
+          <motion.div 
+            className="flex justify-center gap-6 mt-10 flex-wrap"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+          >
+            <motion.button 
+              className="bg-teal-500 hover:bg-teal-600 text-white px-10 py-4 text-xl font-semibold rounded-xl shadow-xl hover:shadow-teal-500/30 transition-all duration-300"
               onClick={() => navigate('/login')}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 0 30px 5px rgba(20, 184, 166, 0.3)"
+              }}
+              whileTap={{ scale: 0.95 }}
             >
               Volunteer Now
-            </button>
-            <button 
-              className="bg-white bg-opacity-90 text-blue-700 px-8 py-4 text-lg font-semibold rounded hover:translate-y-[-3px] transition duration-300 hover:shadow-lg"
+            </motion.button>
+            <motion.button 
+              className="bg-white/10 backdrop-blur-sm border-2 border-teal-500/30 hover:border-teal-500/50 text-white px-10 py-4 text-xl font-semibold rounded-xl shadow-xl hover:shadow-teal-500/30 transition-all duration-300"
               onClick={() => navigate('/report')}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 0 30px 5px rgba(20, 184, 166, 0.2)"
+              }}
+              whileTap={{ scale: 0.95 }}
             >
               Report an Issue
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* How You Can Help Section */}
-      <section className="py-20 px-[5%] bg-white">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl text-blue-700 inline-block mb-4 relative after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 after:transform after:translate-x-[-50%] after:w-[60px] after:h-[3px] after:bg-teal-500">Make a Difference Your Way!</h2>
-        </div>
-        <div className="flex justify-center flex-wrap gap-8 my-12">
-          <div 
-            className="w-[300px] h-[300px] perspective-[1000px] cursor-pointer"
-            onClick={() => handleCardFlip(0)}
+      <motion.section 
+        className="py-20 px-4 relative overflow-hidden"
+        whileHover={{
+          backgroundColor: "rgba(13, 40, 81, 0.8)",
+          transition: { duration: 0.3 }
+        }}
+      >
+        <motion.div 
+          className="absolute inset-0 bg-grid-pattern opacity-5"
+          whileHover={{
+            opacity: 0.08,
+            scale: 1.02,
+            transition: { duration: 0.3 }
+          }}
+        ></motion.div>
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-br from-teal-500/10 via-teal-400/5 to-teal-300/10"
+          animate={{ 
+            opacity: [0.1, 0.2, 0.1],
+            scale: [1, 1.02, 1],
+          }}
+          whileHover={{
+            opacity: 0.3,
+            scale: 1.05,
+            transition: { duration: 0.3 }
+          }}
+          transition={{ 
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <div className="relative z-10">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            <div className={`relative w-full h-full text-center transition-transform duration-800 transform-style-3d ${activeCard === 0 ? 'rotate-y-180' : ''}`}>
-              <div className="absolute w-full h-full backface-hidden rounded-lg shadow-md flex flex-col justify-center items-center p-8 bg-gray-100">
-                <div className="text-6xl mb-4">🌊</div>
-                <h3 className="text-2xl mb-4">Beach Cleanups</h3>
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-200 via-white to-teal-200 mb-6"
+              whileHover={{
+                scale: 1.02,
+                textShadow: "0 0 15px rgba(45, 212, 191, 0.5)"
+              }}
+            >
+              Make a Difference Your Way!
+            </motion.h2>
+          </motion.div>
+
+          <div className="flex justify-center flex-wrap gap-6 mb-16">
+            {[
+              {
+                icon: <FaTrash className="text-4xl text-teal-300" />,
+                title: "Beach Cleanups",
+                description: "Join organized cleanups to keep our beaches trash-free."
+              },
+              {
+                icon: <FaHandsHelping className="text-4xl text-teal-300" />,
+                title: "Adopt-a-Beach",
+                description: "Take responsibility for a section of the beach & maintain it regularly."
+              },
+              {
+                icon: <FaCalendarAlt className="text-4xl text-teal-300" />,
+                title: "Event Volunteering",
+                description: "Assist in organizing sustainability workshops, eco-friendly activities, and beach events."
+              }
+            ].map((card, index) => (
+              <motion.div 
+                key={index}
+                className="w-[280px] perspective-[1000px] cursor-pointer"
+                initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                onClick={() => handleCardFlip(index)}
+              >
+                <motion.div
+                  className={`relative w-full h-full text-center transition-all duration-500 transform-gpu ${
+                    activeCard === index ? '[transform:rotateY(180deg)]' : ''
+                  }`}
+                >
+                  <div className="absolute inset-0 glass-card p-6 rounded-xl backdrop-blur-sm border border-teal-500/20 flex flex-col justify-center items-center backface-hidden min-h-[200px]">
+                    <motion.div
+                      whileHover={{ 
+                        scale: 1.1,
+                        rotate: [0, 5, -5, 0],
+                        transition: { duration: 0.5 }
+                      }}
+                      className="mb-4"
+                    >
+                      {card.icon}
+                    </motion.div>
+                    <h3 className="text-xl font-bold text-gradient mb-2">{card.title}</h3>
               </div>
-              <div className="absolute w-full h-full backface-hidden rounded-lg shadow-md flex flex-col justify-center items-center p-8 bg-blue-700 text-white rotate-y-180">
-                <p className="mb-6 leading-relaxed">Join organized cleanups to keep our beaches trash-free.</p>
-                <a href="#signup" className="bg-teal-500 text-white py-3 px-6 rounded font-medium transition duration-300 hover:bg-teal-600 hover:translate-y-[-2px]">Learn More</a>
+                  <div className="absolute inset-0 glass-card p-6 rounded-xl backdrop-blur-sm border border-teal-500/20 flex flex-col justify-center items-center backface-hidden [transform:rotateY(180deg)] min-h-[200px]">
+                    <p className="text-teal-100/90 mb-4 leading-relaxed">{card.description}</p>
+                    <motion.button
+                      className="btn btn-outline btn-accent btn-sm"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Learn More
+                    </motion.button>
               </div>
-            </div>
+                </motion.div>
+              </motion.div>
+            ))}
           </div>
           
-          <div 
-            className="w-[300px] h-[300px] perspective-[1000px] cursor-pointer"
-            onClick={() => handleCardFlip(1)}
+          {/* Sign Up CTA */}
+          <motion.div
+            className="text-center mb-24"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className={`relative w-full h-full text-center transition-transform duration-800 transform-style-3d ${activeCard === 1 ? 'rotate-y-180' : ''}`}>
-              <div className="absolute w-full h-full backface-hidden rounded-lg shadow-md flex flex-col justify-center items-center p-8 bg-gray-100">
-                <div className="text-6xl mb-4">🏝️</div>
-                <h3 className="text-2xl mb-4">Adopt-a-Beach</h3>
-              </div>
-              <div className="absolute w-full h-full backface-hidden rounded-lg shadow-md flex flex-col justify-center items-center p-8 bg-blue-700 text-white rotate-y-180">
-                <p className="mb-6 leading-relaxed">Take responsibility for a section of the beach & maintain it regularly.</p>
-                <a href="#signup" className="bg-teal-500 text-white py-3 px-6 rounded font-medium transition duration-300 hover:bg-teal-600 hover:translate-y-[-2px]">Learn More</a>
-              </div>
-            </div>
-          </div>
-          
-          <div 
-            className="w-[300px] h-[300px] perspective-[1000px] cursor-pointer"
-            onClick={() => handleCardFlip(2)}
+            <motion.p 
+              className="text-2xl text-teal-100/90 mb-6 font-medium"
+              whileHover={{ 
+                scale: 1.02,
+                textShadow: "0 0 10px rgba(45, 212, 191, 0.4)"
+              }}
+            >
+              Ready to make an impact?
+            </motion.p>
+            <motion.button
+              className="bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white px-12 py-4 text-xl font-semibold rounded-xl shadow-xl hover:shadow-blue-500/30 transition-all duration-300 relative overflow-hidden group"
+              onClick={() => navigate('/signup')}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 0 30px 5px rgba(59, 130, 246, 0.3)"
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.span 
+                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                animate={{
+                  x: ['-100%', '100%'],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+              Join ShoreScan Today
+            </motion.button>
+          </motion.div>
+
+          {/* Statistics Section */}
+          <motion.div 
+            className="mt-8 mb-8 relative"
+            whileHover={{
+              scale: 1.02,
+              transition: { duration: 0.3 }
+            }}
           >
-            <div className={`relative w-full h-full text-center transition-transform duration-800 transform-style-3d ${activeCard === 2 ? 'rotate-y-180' : ''}`}>
-              <div className="absolute w-full h-full backface-hidden rounded-lg shadow-md flex flex-col justify-center items-center p-8 bg-gray-100">
-                <div className="text-6xl mb-4">🎟️</div>
-                <h3 className="text-2xl mb-4">Event Volunteering</h3>
-              </div>
-              <div className="absolute w-full h-full backface-hidden rounded-lg shadow-md flex flex-col justify-center items-center p-8 bg-blue-700 text-white rotate-y-180">
-                <p className="mb-6 leading-relaxed">Assist in organizing sustainability workshops, eco-friendly activities, and beach events.</p>
-                <a href="#signup" className="bg-teal-500 text-white py-3 px-6 rounded font-medium transition duration-300 hover:bg-teal-600 hover:translate-y-[-2px]">Learn More</a>
-              </div>
-            </div>
-          </div>
+            <motion.div 
+              className="absolute left-1/2 top-0 bottom-0 w-1 bg-teal-500/20 hidden md:block"
+              whileHover={{
+                backgroundColor: "rgba(20, 184, 166, 0.4)",
+                width: "4px",
+                transition: { duration: 0.3 }
+              }}
+            ></motion.div>
+            <div className="flex flex-col md:gap-12">
+              {[
+                {
+                  number: "500+",
+                  label: "Volunteers",
+                  icon: <FaUsers className="text-teal-300" />,
+                  side: "left"
+                },
+                {
+                  number: "1000kg",
+                  label: "Waste Collected",
+                  icon: <FaTrash className="text-teal-300" />,
+                  side: "right"
+                },
+                {
+                  number: "20+",
+                  label: "Beach Events",
+                  icon: <FaCalendarAlt className="text-teal-300" />,
+                  side: "left"
+                },
+                {
+                  number: "5km",
+                  label: "Beach Protected",
+                  icon: <FaWater className="text-teal-300" />,
+                  side: "right"
+                }
+              ].map((stat, index) => (
+                <div key={index} className="relative">
+                  <motion.div
+                    className={`flex items-center gap-4 ${
+                      stat.side === 'right' ? 'md:flex-row' : 'md:flex-row-reverse'
+                    } flex-col`}
+                    initial={{ opacity: 0, x: stat.side === 'right' ? 50 : -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.2 }}
+                  >
+                    <div className={`hidden md:block w-[calc(50%-2rem)] ${
+                      stat.side === 'right' ? 'text-left' : 'text-right'
+                    }`}>
+                      <motion.div 
+                        className={`h-0.5 bg-gradient-to-${stat.side === 'right' ? 'r' : 'l'} from-transparent to-teal-500/50`}
+                        whileHover={{
+                          height: "2px",
+                          backgroundColor: "rgba(20, 184, 166, 0.4)",
+                          transition: { duration: 0.3 }
+                        }}
+                      ></motion.div>
         </div>
-        <div className="text-center mt-12">
-          <p className="text-xl mb-4">Sign up today and be a part of the change!</p>
-          <a href="#signup" className="inline-block px-8 py-3 bg-blue-700 text-white no-underline rounded font-semibold transition duration-300 hover:bg-blue-800 hover:translate-y-[-2px]">Sign Up</a>
-        </div>
-      </section>
+                    
+                    <motion.div
+                      className="glass-card p-6 rounded-2xl backdrop-blur-sm border border-teal-500/20 relative z-10 w-full md:w-auto"
+                      whileHover={{ 
+                        scale: 1.05,
+                        boxShadow: "0 0 30px 5px rgba(20, 184, 166, 0.3)",
+                        borderColor: "rgba(20, 184, 166, 0.4)",
+                        backgroundColor: "rgba(20, 184, 166, 0.1)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <div className="absolute -top-2 -left-2 w-4 h-4 rounded-full bg-teal-500/30 animate-ping"></div>
+                      <div className="absolute -top-2 -left-2 w-4 h-4 rounded-full bg-teal-500"></div>
+                      <motion.div 
+                        className="text-3xl mb-3"
+                        whileHover={{ 
+                          scale: 1.1,
+                          rotate: [0, 5, -5, 0],
+                          transition: { duration: 0.5 }
+                        }}
+                      >
+                        {stat.icon}
+                      </motion.div>
+                      <motion.div 
+                        className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-200 via-white to-teal-200"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.3 + index * 0.2 }}
+                      >
+                        {stat.number}
+                      </motion.div>
+                      <motion.div 
+                        className="text-teal-100/80 text-sm mt-2"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.4 + index * 0.2 }}
+                      >
+                        {stat.label}
+                      </motion.div>
+                    </motion.div>
 
-      {/* Reporting Tools Guide */}
-      <section className="py-20 px-[5%] bg-gray-100">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl text-blue-700 inline-block mb-4 relative after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 after:transform after:translate-x-[-50%] after:w-[60px] after:h-[3px] after:bg-teal-500">Reporting Tools Guide</h2>
-          <p className="max-w-xl mx-auto text-lg text-gray-600">Help us keep the beaches safe and clean by reporting issues like pollution, illegal dumping, or wildlife hazards.</p>
-        </div>
-        <div className="flex justify-center flex-wrap gap-8 my-12">
-          <div className="flex-1 min-w-[250px] max-w-[300px] bg-white p-8 rounded-lg shadow-md text-center relative">
-            <div className="absolute top-[-15px] left-1/2 transform translate-x-[-50%] w-[30px] h-[30px] bg-teal-500 text-white rounded-full flex justify-center items-center font-bold">1</div>
-            <div className="text-5xl mb-4">📸</div>
-            <h3 className="text-blue-700 mb-3">Snap a Picture</h3>
-            <p>Take a clear photo of the issue.</p>
-          </div>
-          <div className="flex-1 min-w-[250px] max-w-[300px] bg-white p-8 rounded-lg shadow-md text-center relative">
-            <div className="absolute top-[-15px] left-1/2 transform translate-x-[-50%] w-[30px] h-[30px] bg-teal-500 text-white rounded-full flex justify-center items-center font-bold">2</div>
-            <div className="text-5xl mb-4">📍</div>
-            <h3 className="text-blue-700 mb-3">Provide Location</h3>
-            <p>Share the exact beach name or GPS coordinates.</p>
-          </div>
-          <div className="flex-1 min-w-[250px] max-w-[300px] bg-white p-8 rounded-lg shadow-md text-center relative">
-            <div className="absolute top-[-15px] left-1/2 transform translate-x-[-50%] w-[30px] h-[30px] bg-teal-500 text-white rounded-full flex justify-center items-center font-bold">3</div>
-            <div className="text-5xl mb-4">📩</div>
-            <h3 className="text-blue-700 mb-3">Submit a Report</h3>
-            <p>Use our online form to send the details.</p>
-          </div>
-        </div>
-        <div className="text-center mt-8">
-          <p className="text-lg mb-4 font-medium">Every report helps authorities take action faster</p>
-          <button className="px-8 py-3 bg-blue-700 text-white border-none rounded font-semibold cursor-pointer transition duration-300 hover:bg-blue-800 hover:translate-y-[-2px] hover:shadow-md">Report Now</button>
-        </div>
-      </section>
+                    <div className={`hidden md:block w-[calc(50%-2rem)] ${
+                      stat.side === 'right' ? 'text-right' : 'text-left'
+                    }`}>
+                      <motion.div 
+                        className={`h-0.5 bg-gradient-to-${stat.side === 'right' ? 'l' : 'r'} from-transparent to-teal-500/50`}
+                        whileHover={{
+                          height: "2px",
+                          backgroundColor: "rgba(20, 184, 166, 0.4)",
+                          transition: { duration: 0.3 }
+                        }}
+                      ></motion.div>
+            </div>
+                  </motion.div>
+            </div>
+              ))}
+            </div>
+          </motion.div>
 
-      {/* Partnerships & CSR Collaborations */}
-      <section className="py-20 px-[5%] bg-slate-800 text-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl text-center mb-8 text-white">Partner with Us for a Greener Future!</h2>
-          <p className="text-center max-w-3xl mx-auto mb-12 text-lg leading-relaxed">
-            Are you a business, NGO, or community organization looking to make an impact? 
-            Partner with us for CSR initiatives, sponsorships, and sustainability campaigns.
-          </p>
-          <div className="flex justify-center flex-wrap gap-8 mb-12">
-            <div className="flex-1 min-w-[250px] max-w-[350px] bg-white bg-opacity-10 p-8 rounded-lg text-center transition duration-300 hover:translate-y-[-5px] hover:bg-opacity-15">
-              <div className="text-5xl mb-4">🏢</div>
-              <h3 className="text-teal-500 mb-4">Corporate Volunteering</h3>
-              <p>Engage employees in beach cleanups and environmental programs.</p>
-            </div>
-            <div className="flex-1 min-w-[250px] max-w-[350px] bg-white bg-opacity-10 p-8 rounded-lg text-center transition duration-300 hover:translate-y-[-5px] hover:bg-opacity-15">
-              <div className="text-5xl mb-4">💰</div>
-              <h3 className="text-teal-500 mb-4">Sponsorships</h3>
-              <p>Support our efforts through funding, equipment donations, or event sponsorships.</p>
-            </div>
-            <div className="flex-1 min-w-[250px] max-w-[350px] bg-white bg-opacity-10 p-8 rounded-lg text-center transition duration-300 hover:translate-y-[-5px] hover:bg-opacity-15">
-              <div className="text-5xl mb-4">🌱</div>
-              <h3 className="text-teal-500 mb-4">Eco-Friendly Initiatives</h3>
-              <p>Work together on sustainable projects like recycling programs and waste reduction.</p>
-            </div>
-          </div>
-          <div className="text-center mt-12">
-            <p className="text-xl mb-6">Let's work together for a cleaner, greener future! Fill out our contact form and let's connect!</p>
-            <button className="px-8 py-3 bg-teal-500 text-white border-none rounded font-semibold cursor-pointer transition duration-300 hover:bg-teal-600 hover:translate-y-[-2px] hover:shadow-lg">Become a Partner</button>
-          </div>
+          <motion.div
+            className="text-center mt-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <motion.p
+              className="text-xl text-teal-100/90 mb-6 font-medium"
+              whileHover={{ 
+                scale: 1.01,
+                textShadow: "0 0 8px rgba(45, 212, 191, 0.3)"
+              }}
+            >
+              Be part of our growing community of ocean protectors!
+            </motion.p>
+            <motion.button
+              className="bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-xl hover:shadow-blue-500/30 backdrop-blur-sm transition-all duration-300"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 0 20px 2px rgba(59, 130, 246, 0.2)"
+              }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/signup')}
+            >
+              Sign Up Now
+            </motion.button>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };

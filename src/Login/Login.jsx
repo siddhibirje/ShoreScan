@@ -7,11 +7,11 @@ const LoginSignup = () => {
   
   const tabVariants = {
     active: { 
-      color: '#3b82f6', 
-      borderBottom: '2px solid #3b82f6',
+      color: 'var(--accent-blue)', 
+      borderBottom: '2px solid var(--accent-blue)',
     },
     inactive: { 
-      color: '#6b7280',
+      color: 'var(--text-secondary)',
       borderBottom: '2px solid transparent', 
     }
   };
@@ -35,7 +35,7 @@ const LoginSignup = () => {
   const buttonVariants = {
     hover: { 
       scale: 1.02,
-      backgroundColor: '#2563eb'
+      boxShadow: '0 5px 15px rgba(74, 158, 255, 0.4)'
     },
     tap: { 
       scale: 0.98
@@ -69,10 +69,19 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-md overflow-hidden">
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="glass-card w-full max-w-md p-8">
+        <div className="flex justify-center mb-8">
+          <div className="w-20 h-20 rounded-full border-2 border-accent-blue flex items-center justify-center glow-effect">
+            <svg className="w-10 h-10 text-accent-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+              <circle cx="12" cy="13" r="4" />
+            </svg>
+          </div>
+        </div>
+
         {/* Tabs */}
-        <div className="flex border-b">
+        <div className="flex mb-8">
           <motion.div 
             className="flex-1 py-4 text-center font-medium cursor-pointer"
             variants={tabVariants}
@@ -91,44 +100,42 @@ const LoginSignup = () => {
           </motion.div>
         </div>
 
-        <div className="p-6">
+        <div className="space-y-6">
           {/* Login Form */}
           <motion.form 
             variants={formVariants}
             initial="hidden"
             animate={isLogin ? 'visible' : 'hidden'}
             onSubmit={handleLoginSubmit}
-            className={!isLogin ? 'hidden' : ''}
+            className={!isLogin ? 'hidden' : 'space-y-4'}
           >
-            <div className="mb-4">
-              <label htmlFor="loginEmail" className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
+            <div>
               <input
                 type="email"
                 id="loginEmail"
                 name="loginEmail"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter your email"
+                className="w-full"
+                placeholder="Username"
                 required
               />
             </div>
-            <div className="mb-4">
-              <label htmlFor="loginPassword" className="block text-sm font-medium text-gray-700 mb-1">
-                Password
-              </label>
+            <div>
               <input
                 type="password"
                 id="loginPassword"
                 name="loginPassword"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter your password"
+                className="w-full"
+                placeholder="Password"
                 required
               />
             </div>
-            <div className="text-right mb-4">
-              <a href="#" className="text-sm text-blue-600 hover:text-blue-800">
-                Forgot password?
+            <div className="flex items-center justify-between text-sm">
+              <label className="flex items-center space-x-2 cursor-pointer">
+                <input type="checkbox" className="form-checkbox" />
+                <span>Remember me</span>
+              </label>
+              <a href="#" className="hover:text-accent-blue">
+                Forgot Password?
               </a>
             </div>
             <motion.button
@@ -136,32 +143,32 @@ const LoginSignup = () => {
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md font-medium shadow-sm"
+              className="btn-primary w-full"
             >
-              Login
+              LOGIN
             </motion.button>
 
             <div className="mt-6 text-center">
-              <p className="text-sm text-gray-600">Or login with</p>
+              <p className="text-sm text-text-secondary">Or login with</p>
               <div className="flex justify-center mt-3 space-x-4">
                 <motion.div 
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-300 cursor-pointer"
+                  className="w-10 h-10 rounded-full flex items-center justify-center border border-accent-blue cursor-pointer hover:glow-effect"
                 >
                   G
                 </motion.div>
                 <motion.div 
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-300 cursor-pointer"
+                  className="w-10 h-10 rounded-full flex items-center justify-center border border-accent-blue cursor-pointer hover:glow-effect"
                 >
                   f
                 </motion.div>
                 <motion.div 
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-300 cursor-pointer"
+                  className="w-10 h-10 rounded-full flex items-center justify-center border border-accent-blue cursor-pointer hover:glow-effect"
                 >
                   in
                 </motion.div>
@@ -175,57 +182,45 @@ const LoginSignup = () => {
             initial="hidden"
             animate={!isLogin ? 'visible' : 'hidden'}
             onSubmit={handleSignupSubmit}
-            className={isLogin ? 'hidden' : ''}
+            className={isLogin ? 'hidden' : 'space-y-4'}
           >
-            <div className="mb-4">
-              <label htmlFor="signupName" className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name
-              </label>
+            <div>
               <input
                 type="text"
                 id="signupName"
                 name="signupName"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter your name"
+                className="w-full"
+                placeholder="Full Name"
                 required
               />
             </div>
-            <div className="mb-4">
-              <label htmlFor="signupEmail" className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
+            <div>
               <input
                 type="email"
                 id="signupEmail"
                 name="signupEmail"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter your email"
+                className="w-full"
+                placeholder="Email"
                 required
               />
             </div>
-            <div className="mb-4">
-              <label htmlFor="signupPassword" className="block text-sm font-medium text-gray-700 mb-1">
-                Password
-              </label>
+            <div>
               <input
                 type="password"
                 id="signupPassword"
                 name="signupPassword"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Create a password"
+                className="w-full"
+                placeholder="Password"
                 required
               />
             </div>
-            <div className="mb-6">
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
-                Confirm Password
-              </label>
+            <div>
               <input
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Confirm your password"
+                className="w-full"
+                placeholder="Confirm Password"
                 required
               />
             </div>
@@ -234,37 +229,10 @@ const LoginSignup = () => {
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md font-medium shadow-sm"
+              className="btn-primary w-full"
             >
-              Sign Up
+              SIGN UP
             </motion.button>
-
-            <div className="mt-6 text-center">
-              <p className="text-sm text-gray-600">Or sign up with</p>
-              <div className="flex justify-center mt-3 space-x-4">
-                <motion.div 
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-300 cursor-pointer"
-                >
-                  G
-                </motion.div>
-                <motion.div 
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-300 cursor-pointer"
-                >
-                  f
-                </motion.div>
-                <motion.div 
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-300 cursor-pointer"
-                >
-                  in
-                </motion.div>
-              </div>
-            </div>
           </motion.form>
         </div>
       </div>

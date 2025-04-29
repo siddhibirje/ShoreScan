@@ -14,11 +14,19 @@ const ErosionMap = () => {
 
     // Add GEE Tile Layers
     const erosion2017_2020 = L.tileLayer(
-      "https://earthengine.googleapis.com/v1/projects/ee-siddhibirje007/maps/44c2aafd6037b679bc1dc01d58a2fc69-48801abab84ae33a673bd2317697c7a9/tiles/{z}/{x}/{y}"
+      "https://earthengine.googleapis.com/v1/projects/ee-siddhibirje007/maps/b7d1c3276fede5d42ef0c2d05fb2d3a1-f73b12c563b5b35ed8e3fd52f02c659f/tiles/{z}/{x}/{y}",
+      {
+        opacity: 0.7,
+        zIndex: 2
+      }
     );
 
     const erosion2020_2025 = L.tileLayer(
-      "https://earthengine.googleapis.com/v1/projects/ee-siddhibirje007/maps/51effb02010a7252b37eb537be835112-2f8296fb25f5c876317fd67f566a1539/tiles/{z}/{x}/{y}"
+      "https://earthengine.googleapis.com/v1/projects/ee-siddhibirje007/maps/4549179376112a773f046b9fdb4513a0-b282fad95693f744defb9bba64db403e/tiles/{z}/{x}/{y}",
+      {
+        opacity: 0.7,
+        zIndex: 2
+      }
     );
 
     // Layer Control Toggle

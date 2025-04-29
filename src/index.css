@@ -1,1 +1,573 @@
-@import 'tailwindcss'
+@import 'tailwindcss';
+
+:root {
+  /* Base Colors */
+  --primary-dark: #0a1929;
+  --primary-light: #1a4b8c;
+  --accent-blue: #4a9eff;
+  --glow-blue: rgba(74, 158, 255, 0.5);
+  
+  /* Gradients */
+  --bg-gradient: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+  --card-gradient: linear-gradient(135deg, rgba(26, 75, 140, 0.1) 0%, rgba(74, 158, 255, 0.1) 100%);
+  
+  /* Glass Effect */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+}
+
+body {
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Glass Card Effect */
+.glass-card {
+  background: linear-gradient(to bottom right, rgba(13, 148, 136, 0.35), rgba(15, 118, 110, 0.4));
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 30%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+.glass-card-hover {
+  transition: all 0.3s ease;
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 12px 40px rgba(13, 148, 136, 0.2),
+    inset 0 0 30px rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Glowing Elements */
+.glow-effect {
+  position: relative;
+}
+
+.glow-effect::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: var(--accent-blue);
+  filter: blur(15px);
+  z-index: -1;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.glow-effect:hover::after {
+  opacity: 1;
+}
+
+/* Buttons */
+.btn-primary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  margin-left: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Navigation */
+.nav-glass {
+  background: linear-gradient(to right, rgba(15, 118, 110, 0.95), rgba(6, 95, 70, 0.95));
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+}
+
+.nav-glass h1 {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nav-glass .text-white {
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #ffffff 20%, #60A5FA 50%, #34D399 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+}
+
+.nav-glass .text-accent-blue {
+  display: none;
+}
+
+.nav-glass button:hover .text-accent-blue {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .7;
+  }
+}
+
+/* Stats Cards */
+.stat-card {
+  background: linear-gradient(to bottom right, rgba(13, 148, 136, 0.35), rgba(15, 118, 110, 0.4));
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 30%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.stat-card:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 0 30px rgba(13, 148, 136, 0.2),
+    inset 0 0 30px rgba(255, 255, 255, 0.08);
+}
+
+/* Text Gradients */
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Input Fields */
+input, textarea, select {
+  background: rgba(13, 25, 48, 0.6) !important;
+  border: 1px solid rgba(100, 255, 218, 0.2) !important;
+  color: var(--text-primary) !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+  transition: all 0.3s ease !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 0 10px rgba(74, 158, 255, 0.3) !important;
+  outline: none !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Links */
+a {
+  color: var(--accent-blue);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--glow-blue);
+}
+
+/* Tables */
+table {
+  background: var(--glass-bg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+  padding: 1rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-blue);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--glow-blue);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #60A5FA, #34D399);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+}
+
+.gradient-text-alt {
+  background: linear-gradient(135deg, #34D399, #60A5FA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite reverse;
+}
+
+.glow-text {
+  filter: drop-shadow(0 0 15px rgba(96, 165, 250, 0.3));
+  transition: filter 0.3s ease;
+}
+
+.glow-text:hover {
+  filter: drop-shadow(0 0 25px rgba(96, 165, 250, 0.5));
+}
+
+.glow-text-subtle {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+  transition: filter 0.3s ease;
+}
+
+.glow-text-subtle:hover {
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Hover glow effect */
+.hover-glow {
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  transition: all 0.3s ease;
+}
+
+.group:hover .hover-glow {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+/* Enhanced button hover effect */
+.group:hover .group-hover\:text-white {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Smooth underline animation */
+.group:hover .absolute {
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+}
+
+/* Card Content */
+.glass-card h2, .glass-card h3, .glass-card h4 {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.glass-card p {
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced Glass Card Effect */
+.enhanced-glass-card {
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(15, 118, 110, 0.25));
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 30px rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.enhanced-glass-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    transparent 60%
+  );
+  transform: rotate(-45deg);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.enhanced-glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 40px rgba(13, 148, 136, 0.3),
+    inset 0 0 50px rgba(255, 255, 255, 0.08);
+}
+
+.enhanced-glass-card:hover::before {
+  opacity: 1;
+  animation: shine 1.5s infinite;
+}
+
+.glow-overlay {
+  background: radial-gradient(
+    circle at center,
+    rgba(13, 148, 136, 0.3) 0%,
+    rgba(15, 118, 110, 0.2) 30%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@keyframes shine {
+  0% {
+    transform: rotate(-45deg) translate(-50%, -50%);
+  }
+  50% {
+    transform: rotate(-45deg) translate(50%, 50%);
+  }
+  100% {
+    transform: rotate(-45deg) translate(-50%, -50%);
+  }
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Text gradient enhancement */
+.text-gradient {
+  background: linear-gradient(135deg, #4ade80 0%, #2dd4bf 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+/* SDG Card Glow Effects */
+.sdg11-card {
+  box-shadow: 
+    0 8px 40px rgba(255, 158, 27, 0.2),
+    inset 0 0 50px rgba(255, 158, 27, 0.08);
+}
+
+.sdg11-card .glow-overlay {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 158, 27, 0.2) 0%,
+    rgba(255, 158, 27, 0.1) 30%,
+    transparent 70%
+  );
+}
+
+.sdg14-card {
+  box-shadow: 
+    0 8px 40px rgba(10, 151, 217, 0.2),
+    inset 0 0 50px rgba(10, 151, 217, 0.08);
+}
+
+.sdg14-card .glow-overlay {
+  background: radial-gradient(
+    circle at center,
+    rgba(10, 151, 217, 0.2) 0%,
+    rgba(10, 151, 217, 0.1) 30%,
+    transparent 70%
+  );
+}
+
+/* Enhanced shine effect for SDG cards */
+.enhanced-glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: skewX(-15deg);
+  transition: 0.5s;
+}
+
+.enhanced-glass-card:hover::after {
+  left: 100%;
+  transition: 0.7s;
+}
+
+/* Hover animations for SDG cards */
+.enhanced-glass-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.enhanced-glass-card:hover {
+  transform: translateY(-5px);
+}
+
+.enhanced-glass-card img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.enhanced-glass-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Leaflet Map Styles */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.leaflet-control-container .leaflet-control {
+  background: rgba(13, 148, 136, 0.25) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+  color: white !important;
+}
+
+.leaflet-control-layers-toggle {
+  background-color: rgba(13, 148, 136, 0.25) !important;
+}
+
+.leaflet-control-layers-expanded {
+  padding: 10px !important;
+  color: white !important;
+  background: rgba(13, 148, 136, 0.25) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.leaflet-control-layers label {
+  margin-bottom: 5px !important;
+  color: white !important;
+}
+
+.leaflet-control-layers-selector {
+  margin-right: 8px !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(13, 148, 136, 0.25) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(13, 148, 136, 0.25) !important;
+}
+
+.leaflet-popup-content {
+  margin: 10px !important;
+  color: white !important;
+}
+
+.leaflet-control-zoom a {
+  background: rgba(13, 148, 136, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: rgba(15, 118, 110, 0.4) !important;
+}
